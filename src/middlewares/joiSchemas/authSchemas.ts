@@ -5,3 +5,8 @@ export const createUser = Joi.object({
   password: Joi.string().min(8).required(),
   confirmPassword: Joi.string().valid(Joi.ref("password")).required(),
 });
+
+export const login = Joi.object({
+  username: Joi.string().required(),
+  password: Joi.string().required(),
+});
