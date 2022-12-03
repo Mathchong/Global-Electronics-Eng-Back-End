@@ -15,4 +15,4 @@ export default class AuthRepository {
   }
 }
 
-export type userData = Omit<user, "id">;
+export type userData = Omit<user, "id" | "created_at">;
