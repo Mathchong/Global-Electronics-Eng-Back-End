@@ -11,7 +11,66 @@ datasource db {
 }
 
 model user {
-  id       Int    @id @default(autoincrement())
-  username String @unique
-  password String 
+  id           Int            @id @default(autoincrement())
+  username     String         @unique
+  password     String
+  created_at   DateTime       @default(now())
+  solicitation solicitation[]
+}
+
+model area {
+  id           Int            @id @default(autoincrement())
+  name         String         @unique @db.VarChar(50)
+  solicitation solicitation[]
+}
+
+model solicitation_types {
+  id           Int            @id @default(autoincrement())
+  name         String         @unique @db.VarChar(50)
+  solicitation solicitation[]
+}
+
+model priority_types {
+  id           Int            @id @default(autoincrement())
+  name         String         @unique @db.VarChar(50)
+  deadline     Int
+  solicitation solicitation[]
+}
+
+model solicitation_status {
+  id           Int            @id @default(autoincrement())
+  name         String         @unique @db.VarChar(50)
+  solicitation solicitation[]
+}
+
+model solicitation_follows {
+  id             Int      @id @default(autoincrement())
+  description    String   @db.VarChar(500)
+  created_at     DateTime @default(now())
+  solicitationId Int
+
+  solicitation solicitation @relation(fields: [solicitationId], references: [id])
+}
+
+model solicitation {
+  id                    Int       @id @default(autoincrement())
+  userId                Int
+  areaId                Int
+  solicitation_typesId  Int
+  priority_typesId      Int
+  solicitation_statusId Int
+  itemCode              Int
+  references            String    @db.VarChar(255)
+  manufacturer          String    @db.VarChar(255)
+  application           String    @db.VarChar(255)
+  reason                String    @db.VarChar(255)
+  created_at            DateTime  @default(now())
+  closed_at             DateTime?
+
+  area                 area                   @relation(fields: [areaId], references: [id])
+  user                 user                   @relation(fields: [userId], references: [id])
+  type                 solicitation_types     @relation(fields: [solicitation_typesId], references: [id])
+  priority             priority_types         @relation(fields: [priority_typesId], references: [id])
+  solicitation_follows solicitation_follows[]
+  status               solicitation_status    @relation(fields: [solicitation_statusId], references: [id])
 }
