@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import Joi from "joi";
 import { Schema } from "joi";
 
 export default function schemaValidator(schema: Schema) {
