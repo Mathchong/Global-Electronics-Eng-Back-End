@@ -17,6 +17,11 @@ export function errorHandler(
   if (error.message === "jwt expired") {
     return res.status(401).json({ message: error.message, status: 401 });
   }
+
+  if(error.message === "invalid token"){
+    return res.status(400).json({ message: error.message, status: 400 });
+  }
+
   console.log(error.message);
   return res
     .status(500)
