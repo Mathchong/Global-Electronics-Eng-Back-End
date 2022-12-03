@@ -1,8 +1,10 @@
 import {Router} from 'express';
-import Auth from "./authRouter"
+import auth from "./authRouter"
+import solicitation from './solicitation';
 
 const mainRouter = Router();
 
-mainRouter.use(Auth)
+mainRouter.use(auth)
+mainRouter.use(solicitation)
 
 export default mainRouter;
