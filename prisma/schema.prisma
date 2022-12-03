@@ -60,7 +60,7 @@ model solicitation {
   priority_typesId      Int
   solicitation_statusId Int
   itemCode              Int
-  references            String    @db.VarChar(255)
+  reference            String    @db.VarChar(255)
   manufacturer          String    @db.VarChar(255)
   application           String    @db.VarChar(255)
   reason                String    @db.VarChar(255)
